@@ -1,5 +1,34 @@
 const httpRequest = new XMLHttpRequest();
 
+const contentBoxes = document.getElementsByClassName("ex-content");
+
+const bt1 = document.getElementById("bt1");
+const bt2 = document.getElementById("bt2");
+const bt3 = document.getElementById("bt3");
+
+const toggleOtherItem = (id) => {
+  for (let box of contentBoxes) {
+    if (box.id !== id) {
+      box.classList.remove('show');
+    }
+  }
+}
+
+bt1.onclick = () => {
+  const id = bt1.attributes["aria-controls"].value;
+  toggleOtherItem(id);
+};
+
+bt2.onclick = () => {
+  const id = bt2.attributes["aria-controls"].value;
+  toggleOtherItem(id);
+};
+
+bt3.onclick = () => {
+  const id = bt3.attributes["aria-controls"].value;
+  toggleOtherItem(id);
+};
+
 function loadDoc(page) {
     httpRequest.onload = function () {
         document.getElementById("content").innerHTML = this.responseText;
@@ -51,78 +80,78 @@ function showpopup() {
 
 }
 
-        /* Generate and print initial list of numbers */
-        function generateArray() {
-            let arr = [];
-            for (let i = 0; i < 1000; i++) {
-            arr.push(Math.floor(Math.random() * 100) + 1);
-            }
-            document.getElementById("originalArray").innerHTML =
-            "Original Array: " + arr.join(", ");
-            return arr;
+/* Generate and print initial list of numbers */
+function generateArray() {
+    let arr = [];
+    for (let i = 0; i < 1000; i++) {
+        arr.push(Math.floor(Math.random() * 100) + 1);
     }
-        /* Merge two arrays function */
-        function merge(lArray, rArray) {
-            let sortedArr = [];
-            while (lArray.length && rArray.length) {
-            if (lArray[0] <= rArray[0]) {
-                sortedArr.push(lArray[0]);
-                lArray = lArray.slice(1);
-            } else {
-                sortedArr.push(rArray[0]);
-                rArray = rArray.slice(1);
-            }
-            }
-            while (lArray.length) sortedArr.push(lArray.shift());
-            while (rArray.length) sortedArr.push(rArray.shift());
-            return sortedArr;
+    document.getElementById("originalArray").innerHTML =
+        "Original Array: " + arr.join(", ");
+    return arr;
+}
+/* Merge two arrays function */
+function merge(lArray, rArray) {
+    let sortedArr = [];
+    while (lArray.length && rArray.length) {
+        if (lArray[0] <= rArray[0]) {
+            sortedArr.push(lArray[0]);
+            lArray = lArray.slice(1);
+        } else {
+            sortedArr.push(rArray[0]);
+            rArray = rArray.slice(1);
         }
-        /* Merge-sort algorithm function */
-        function mergeSort(arr) {
-            if (arr.length <= 1) {
-            return arr;
-            } 
-            else {
-            let mid = Math.floor(arr.length / 2);
-            let lArray = arr.slice(0, mid);
-            let rArray = arr.slice(mid, arr.length);
-            return merge(mergeSort(lArray), mergeSort(rArray));
-            }
-        }
-        
-        /* Quick-sort algorithm function */
-        function quickSort(arr) {
-            if (arr.length <= 1) {
-            return arr;
-            } else {
-            let pivotIndex = Math.floor(arr.length / 2);
-            let pivot = arr.splice(pivotIndex, 1)[0];
-            let lArray = [];
-            let rArray = [];
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i] < pivot) {
+    }
+    while (lArray.length) sortedArr.push(lArray.shift());
+    while (rArray.length) sortedArr.push(rArray.shift());
+    return sortedArr;
+}
+/* Merge-sort algorithm function */
+function mergeSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+    else {
+        let mid = Math.floor(arr.length / 2);
+        let lArray = arr.slice(0, mid);
+        let rArray = arr.slice(mid, arr.length);
+        return merge(mergeSort(lArray), mergeSort(rArray));
+    }
+}
+
+/* Quick-sort algorithm function */
+function quickSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    } else {
+        let pivotIndex = Math.floor(arr.length / 2);
+        let pivot = arr.splice(pivotIndex, 1)[0];
+        let lArray = [];
+        let rArray = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] < pivot) {
                 lArray.push(arr[i]);
-                } else {
+            } else {
                 rArray.push(arr[i]);
-                }
-            }
-            return quickSort(lArray).concat([pivot], quickSort(rArray));
             }
         }
-        /* Action for when the button is pressed */
-        function execute() {
-            var tick = Date.now();
-            let arr = generateArray();
-            var tock = Date.now();
-            document.getElementById("measure0").innerHTML = `Execution Time: ${tock - tick} ms`;
-            let sorterMerge = mergeSort(arr);
-            var tick = Date.now();
-            document.getElementById("measure1").innerHTML = `Execution Time: ${tick - tock} ms`;
-            let sortedQuick = quickSort(arr);
-            var tock = Date.now();
-            document.getElementById("measure2").innerHTML = `Execution Time: ${tock - tick} ms`;
-            document.getElementById("sortedMerge").innerHTML =
-            "Sorted Array (Merge Sort): " + sorterMerge.join(", ");
-            document.getElementById("sortedQuick").innerHTML =
-            "Sorted Array (Quick Sort): " + sortedQuick.join(", ");
+        return quickSort(lArray).concat([pivot], quickSort(rArray));
     }
+}
+/* Action for when the button is pressed */
+function execute() {
+    var tick = Date.now();
+    let arr = generateArray();
+    var tock = Date.now();
+    document.getElementById("measure0").innerHTML = `Execution Time: ${tock - tick} ms`;
+    let sorterMerge = mergeSort(arr);
+    var tick = Date.now();
+    document.getElementById("measure1").innerHTML = `Execution Time: ${tick - tock} ms`;
+    let sortedQuick = quickSort(arr);
+    var tock = Date.now();
+    document.getElementById("measure2").innerHTML = `Execution Time: ${tock - tick} ms`;
+    document.getElementById("sortedMerge").innerHTML =
+        "Sorted Array (Merge Sort): " + sorterMerge.join(", ");
+    document.getElementById("sortedQuick").innerHTML =
+        "Sorted Array (Quick Sort): " + sortedQuick.join(", ");
+}
