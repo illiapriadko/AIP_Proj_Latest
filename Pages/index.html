@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./dist/bootstrap.min.css">
+  <link rel="stylesheet" href="./dist/styles-dist.css">
+  <title>Project 4.2: Responsive page</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <h2 class="navbar-brand d-flex align-items-center pt-3">
+          <strong>1DA1611: Advanced Internet Programming</strong>
+        </h2>
+      </div>
+    </div>
+  </header>
+  <!-- Main container -->
+  <main>
+    <div class="container my-main">
+      <div class="row">
+        <!-- Sidebar with project list -->
+        <div class=" col-12  col-sm-12  col-md-3 sidebar-left">
+          <h2>Projects</h2>
+          <div class="btn-group-vertical actions">
+            <button class="btn btn-outline-primary mt-4 action" id="bt1" type="button" data-bs-toggle="collapse"
+              data-bs-target="#ex1" aria-expanded="false" aria-controls="ex1">
+              1. HTML table
+            </button>
+            <button class="btn btn-outline-primary mt-4 action" id="bt2" type=" button" data-bs-toggle="collapse"
+              data-bs-target="#ex2" aria-expanded="false" aria-controls="ex2">
+              2. CSS Tableless table
+            </button>
+            <button class="btn btn-outline-primary mt-4 action" id="bt3" type=" button" data-bs-toggle="collapse"
+              data-bs-target="#ex3" aria-expanded="false" aria-controls="ex3">
+              3. Sorting algorithms in JS
+            </button>
+          </div>
+        </div>
+        <!-- Main content with button linking to the project -->
+        <div class=" col-12  col-sm-12 col-md-9 main-content">
+          <h2>Exercises</h2>
+
+          <div class="collapse ex-content mt-4" id="ex1">
+            <div class="card card-body">
+              Project 1<br>Complete:<br>
+              - Define an HTML table, add the form and its elements with respective attributes<br>
+              - Add a JavaScript section for handling submitted data and showing it on screen
+              <a class="btn btn-primary mt-4" href="./Proj1/index.html" target="_blank" role="button">Launch page</a>
+            </div>
+
+          </div>
+
+          <div class="collapse ex-content mt-4" id="ex2">
+            <div class="card card-body">
+              Project 2<br>Complete:<br>
+              - Link the stylesheet to the main .html file<br>
+              - Change definition of the table to tableless in the .html file<br>
+              - Adjust the styles
+              <a class="btn btn-primary mt-4" href="./Proj2/index.html" target="_blank" role="button">Launch page</a>
+            </div>
+
+          </div>
+
+          <div class="collapse ex-content mt-4" id="ex3">
+            <div class="card card-body">
+              Project 3 & 4.1<br>Complete:<br>
+              -Define a set of functions in JavaScript, responsible for:<br>
+              a. creating an array of 10 random numbers<br>
+              b. merge-sort algorithm<br>
+              c. quick-sort algorithm<br>
+              - Define an HTML page as a front-end to the JS code<br>
+              Additionally (4.1):<br>
+              - Define time measurement inside the previous sorting algorithm script<br>
+              - Adjust arrays for meaningful output
+              <a class="btn btn-primary mt-4" target="_blank" href="./Proj41/index.html" role="button">Launch page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- Footer -->
+  <footer class="text-muted py-5 my-footer">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1"> Illia Priadko: 309062</p>
+      <p class="mb-0"> Warsaw University of Technology</p>
+    </div>
+  </footer>
+  <script src="./dist/bootstrap.bundle.min.js"> </script>
+  <script src="./dist/scripts-dist.js"> </script>
+</body>
+
+</html>

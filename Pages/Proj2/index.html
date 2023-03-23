@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab 2: Tableless table</title>
+<!-- Link to stylesheet-->
+<link href="style.css" rel="stylesheet" media="all" />
+</head>
+<body>
+<!-- Table along with the form content-->
+<div class="table">
+    <form id="myForm">
+        <!-- Name -->
+        <div class="tr">
+            <div class="td">First name:
+            </div>
+            <div class="td">
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" name="fname">
+            </div>
+        </div>
+        <div class="tr">
+            <div class="td">Last name:
+            </div>
+            <div class="td">
+                <label for="lname">Last name:</label><br>
+                <input type="text" id="lname" name="lname">
+            </div>
+        </div>
+        <!-- Age ranges as a drop-down list-->
+        <div class="tr">
+            <div class="td">
+                Age:
+            </div>
+            <div class="td">
+                <input list="agelist" id="age" name="age">
+                    <datalist id="agelist">
+                    <option value="0-18">
+                    <option value="18-21">
+                    <option value="21-30">
+                    <option value="30-50">
+                    <option value="50+">
+                    </datalist>
+            </div>
+        </div>
+        <div class="tr">
+            <!-- Sex as radio buttons in the same category (name)-->
+            <div class="td">Sex:</div>
+                <div class="td">
+                    <input type="radio" id="male" name="sex" value="Male"><label for="male">Male</label>
+                    <input type="radio" id="female" name="sex" value="Female"><label for="female">Female</label>
+                </div>
+            </div>
+        <div class="tr">
+            <!-- Hobbies as checkboxes-->
+            <div class="td">Hobby:</div>
+            <div class="td">
+                <input type="checkbox" id="art" name="hobby" value="Art">
+                <label for="art">Art</label>
+                <input type="checkbox" id="sports" name="hobby" value="Sports">
+                <label for="sports">Sports</label>
+                <input type="checkbox" id="music" name="hobby" value="Music">
+                <label for="music">Music</label>
+                <input type="checkbox" id="eng" name="hobby" value="Engineering">
+                <label for="eng">Engineering</label>
+            </div>
+        </div>
+        <div class="tr">
+            <!-- Submit and cancel buttons at the bottom to call the JS function or reset the form-->
+            <div class="td"><input type="submit" onclick="showpopup()" value="OK" class="submitbutton"></div>
+            <div class="td"><input type="reset" value="Cancel" class="cancelbutton"></div>
+        </div>
+    </form>
+</div>
+
+<script>
+        function showpopup() {
+            // Define the form to be reffered to in the future loop
+            var myForm = document.getElementById("myForm");
+            // Initialise and get values from user input of the form to store in variables
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var age = document.getElementById('age').value;
+            // Initialise variable and provide if-statements to populate it with either or neither value
+            var sex = "Not selected";
+            if (document.getElementById("male").checked == true) {
+                sex = document.getElementById("male").value;
+            }
+            if (document.getElementById("female").checked == true) {
+                sex = document.getElementById("female").value;
+            }
+            // Initialise variable and provide a for-loop to look for checked checkboxes
+            var hobbies = "";
+            var i;
+            for (i=0; i < myForm.hobby.length; i++){
+                if(myForm.hobby[i].checked == true){
+                    // Concatenate found checkbox to the string of "hobbies"
+                    hobbies+=myForm.hobby[i].value + " ";
+                }
+            }
+            // Show popup with gathered info
+            alert(`Form submission:\n\nName: ${fname} ${lname}\nAge: ${age}\nSex: ${sex}\nHobbies: ${hobbies}`);
+
+        }
+</script>
+</body>
+</html>

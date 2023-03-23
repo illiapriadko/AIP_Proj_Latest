@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<!-- CSS for the table to match the task-->
+    <style>
+        table, th, td {
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+<head>
+<title>Lab 1: Form</title>
+</head>
+<body>
+<!-- Table along with the form content-->
+<table>
+    <form id="myForm">
+        <!-- Name -->
+        <tr><td>First name:</td><td><label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname"></td></tr>
+        <tr><td>Last name:</td><td><label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname"></td></tr>
+        <!-- Age ranges as a drop-down list-->
+        <tr><td>Age:</td><td><input list="agelist" id="age" name="age">
+            <datalist id="agelist">
+              <option value="0-18">
+              <option value="18-21">
+              <option value="21-30">
+              <option value="30-50">
+              <option value="50+">
+            </datalist>
+            </td>
+        </tr>
+        <tr>
+            <!-- Sex as radio buttons in the same category (name)-->
+            <td>Sex:</td>
+                <td>
+                    <input type="radio" id="male" name="sex" value="Male"><label for="male">Male</label>
+                    <input type="radio" id="female" name="sex" value="Female"><label for="female">Female</label>
+                </td>
+            </tr>
+        <tr>
+            <!-- Hobbies as checkboxes-->
+            <td>Hobby:</td>
+            <td>
+                <input type="checkbox" id="art" name="hobby" value="Art">
+                <label for="art">Art</label>
+                <input type="checkbox" id="sports" name="hobby" value="Sports">
+                <label for="sports">Sports</label>
+                <input type="checkbox" id="music" name="hobby" value="Music">
+                <label for="music">Music</label>
+                <input type="checkbox" id="eng" name="hobby" value="Engineering">
+                <label for="eng">Engineering</label>
+            </td>
+        </tr>
+        <tr>
+            <!-- Submit and cancel buttons at the bottom to call the JS function or reset the form-->
+            <td><input type="submit" onclick="showpopup()" value="OK"></td>
+            <td><input type="reset" value="Cancel"></td>
+        </tr>
+    </form>
+</table>
+
+<script>
+        function showpopup() {
+            // Define the form to be reffered to in the future loop
+            var myForm = document.getElementById("myForm");
+            // Initialise and get values from user input of the form to store in variables
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var age = document.getElementById('age').value;
+            // Initialise variable and provide if-statements to populate it with either or neither value
+            var sex = "Not selected";
+            if (document.getElementById("male").checked == true) {
+                sex = document.getElementById("male").value;
+            }
+            if (document.getElementById("female").checked == true) {
+                sex = document.getElementById("female").value;
+            }
+            // Initialise variable and provide a for-loop to look for checked checkboxes
+            var hobbies = "";
+            var i;
+            for (i=0; i < myForm.hobby.length; i++){
+                if(myForm.hobby[i].checked == true){
+                    // Concatenate found checkbox to the string of "hobbies"
+                    hobbies+=myForm.hobby[i].value + " ";
+                }
+            }
+            // Show popup with gathered info
+            alert(`Form submission:\n\nName: ${fname} ${lname}\nAge: ${age}\nSex: ${sex}\nHobbies: ${hobbies}`);
+
+        }
+</script>
+</body>
+</html>
