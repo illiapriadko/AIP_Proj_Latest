@@ -1,0 +1,54 @@
+.table {
+    display: table;
+    border: 1px solid #085c1f;
+}
+.table .tr:nth-child(odd) {
+    background-color: #deffe7;
+}
+.table .tr {
+    display: table-row;
+    border-bottom: 1px solid #29ff62;
+}
+.table .td {
+    display: table-cell;
+    padding: 10px;
+    border-bottom: 1px solid #085c1f;
+}
+.table .td:first-child {
+    display: table-cell;
+    padding: 10px;
+    background-color: #b0ffc5;
+}
+.table .tr:last-child .td {
+    border:0;
+}
+.submitbutton {
+    background-color: #4CAF50;
+    border: 1px solid #085c1f;
+    color: white;
+    padding: 5px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+.cancelbutton {
+    background-color: #e7e7e7;
+    border: 1px solid #9c9c9c;
+    color: black;
+    padding: 5px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+.submitbutton:hover {
+    background-color: #60d17e;
+}
+.cancelbutton:hover {
+    background-color: #f0f0f0;
+}
+.time {
+    color: rgb(7, 112, 0);
+    font-size: 24px;
+}
