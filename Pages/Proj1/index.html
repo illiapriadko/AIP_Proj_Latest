@@ -16,18 +16,21 @@
 
 <body>
     <!-- Table along with the form content-->
-    <table>
-        <form id="myForm">
+
+    <form id="myForm">
+        <table>
             <!-- Name -->
             <tr>
                 <td>First name:</td>
                 <td><label for="fname">First name:</label><br>
-                    <input type="text" id="fname" name="fname"></td>
+                    <input type="text" id="fname" name="fname">
+                </td>
             </tr>
             <tr>
                 <td>Last name:</td>
                 <td><label for="lname">Last name:</label><br>
-                    <input type="text" id="lname" name="lname"></td>
+                    <input type="text" id="lname" name="lname">
+                </td>
             </tr>
             <!-- Age ranges as a drop-down list-->
             <tr>
@@ -69,8 +72,9 @@
                 <td><input type="submit" onclick="showpopup()" value="OK"></td>
                 <td><input type="reset" value="Cancel"></td>
             </tr>
-        </form>
-    </table>
+        </table>
+    </form>
+
 
     <script>
         function showpopup() {

@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Sorting Algorithms</title>
-   </head>
-   <body>
-     <h1>Sorting Algorithms</h1>
-     <button onclick="execute()">Execute</button>
-     <br><br>
-     <div id="originalArray"></div>
-     <br>
-     <div id="measure0" class="time"></div>
-     <br>
-     <div id="sortedMerge"></div>
-     <br>
-     <div id="measure1" class="time"></div>
-     <br>
-     <div id="sortedQuick"></div>
-     <br>
-     <div id="measure2" class="time"></div>
-     <style>
+</head>
+
+<body>
+    <h1>Sorting Algorithms</h1>
+    <button onclick="execute()">Execute</button>
+    <br><br>
+    <div id="originalArray"></div>
+    <br>
+    <div id="measure0" class="time"></div>
+    <br>
+    <div id="sortedMerge"></div>
+    <br>
+    <div id="measure1" class="time"></div>
+    <br>
+    <div id="sortedQuick"></div>
+    <br>
+    <div id="measure2" class="time"></div>
+    <style>
         .time {
             color: rgb(7, 112, 0);
             font-size: 24px;
         }
-        body {
-            font-family: Arial;
-        }
-     </style>
-     <script>
-        
+    </style>
+    <script>
+
         /* Generate and print initial list of numbers */
         function generateArray() {
             let arr = [];
             for (let i = 0; i < 1000; i++) {
-            arr.push(Math.floor(Math.random() * 100) + 1);
+                arr.push(Math.floor(Math.random() * 100) + 1);
             }
             document.getElementById("originalArray").innerHTML =
-            "Original Array: " + arr.join(", ");
+                "Original Array: " + arr.join(", ");
             return arr;
-    }
+        }
         /* Merge two arrays function */
         function merge(lArray, rArray) {
             let sortedArr = [];
             while (lArray.length && rArray.length) {
-            if (lArray[0] <= rArray[0]) {
-                sortedArr.push(lArray[0]);
-                lArray = lArray.slice(1);
-            } else {
-                sortedArr.push(rArray[0]);
-                rArray = rArray.slice(1);
-            }
+                if (lArray[0] <= rArray[0]) {
+                    sortedArr.push(lArray[0]);
+                    lArray = lArray.slice(1);
+                } else {
+                    sortedArr.push(rArray[0]);
+                    rArray = rArray.slice(1);
+                }
             }
             while (lArray.length) sortedArr.push(lArray.shift());
             while (rArray.length) sortedArr.push(rArray.shift());
@@ -58,33 +57,33 @@
         /* Merge-sort algorithm function */
         function mergeSort(arr) {
             if (arr.length <= 1) {
-            return arr;
-            } 
+                return arr;
+            }
             else {
-            let mid = Math.floor(arr.length / 2);
-            let lArray = arr.slice(0, mid);
-            let rArray = arr.slice(mid, arr.length);
-            return merge(mergeSort(lArray), mergeSort(rArray));
+                let mid = Math.floor(arr.length / 2);
+                let lArray = arr.slice(0, mid);
+                let rArray = arr.slice(mid, arr.length);
+                return merge(mergeSort(lArray), mergeSort(rArray));
             }
         }
-        
+
         /* Quick-sort algorithm function */
         function quickSort(arr) {
             if (arr.length <= 1) {
-            return arr;
+                return arr;
             } else {
-            let pivotIndex = Math.floor(arr.length / 2);
-            let pivot = arr.splice(pivotIndex, 1)[0];
-            let lArray = [];
-            let rArray = [];
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i] < pivot) {
-                lArray.push(arr[i]);
-                } else {
-                rArray.push(arr[i]);
+                let pivotIndex = Math.floor(arr.length / 2);
+                let pivot = arr.splice(pivotIndex, 1)[0];
+                let lArray = [];
+                let rArray = [];
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i] < pivot) {
+                        lArray.push(arr[i]);
+                    } else {
+                        rArray.push(arr[i]);
+                    }
                 }
-            }
-            return quickSort(lArray).concat([pivot], quickSort(rArray));
+                return quickSort(lArray).concat([pivot], quickSort(rArray));
             }
         }
         /* Action for when the button is pressed */
@@ -100,11 +99,12 @@
             var tock = Date.now();
             document.getElementById("measure2").innerHTML = `Execution Time: ${tock - tick} ms`;
             document.getElementById("sortedMerge").innerHTML =
-            "Sorted Array (Merge Sort): " + sorterMerge.join(", ");
+                "Sorted Array (Merge Sort): " + sorterMerge.join(", ");
             document.getElementById("sortedQuick").innerHTML =
-            "Sorted Array (Quick Sort): " + sortedQuick.join(", ");
-    }
-  
+                "Sorted Array (Quick Sort): " + sortedQuick.join(", ");
+        }
+
     </script>
-   </body>
- </html>
+</body>
+
+</html>
