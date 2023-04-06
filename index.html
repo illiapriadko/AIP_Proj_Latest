@@ -24,10 +24,14 @@
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(1)">Project 1</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(2)">Project 2</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(3)">Project 3</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(4)">Project 4</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(1)">Project
+                        1</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(2)">Project
+                        2</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(3)">Project
+                        3</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(4)">Project
+                        4</button>
                 </div>
             </div>
         </div>
@@ -48,10 +52,14 @@
     <footer class="text-muted bg-dark py-5 my-footer">
         <div class="container">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(1)">Project 1</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(2)">Project 2</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(3)">Project 3</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(4)">Project 4</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(1)">Project
+                    1</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(2)">Project
+                    2</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(3)">Project
+                    3</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(4)">Project
+                    4</button>
             </div>
         </div>
     </footer>
@@ -61,11 +69,16 @@
     <script src="./Pages/dist/scripts-dist.js"></script>
     <script src="jquery-1.12.2.js"></script>
     <script>
+        // make sure page loads fully first
         $(document).ready(function () {
+            // define identifier for clicked button
             var $clickedButton = null;
+            // select all .my-btn class elements and define click event
             $('.my-btn').click(function () {
+                // index which button is pressed to later refer to in accessing the other set (header/footer)
                 var index = $(this).index('.my-btn');
                 var $buttonFooter = $('.my-btn-footer').eq(index);
+                // if clicked button not used, retract to default width
                 if ($clickedButton != null) {
                     $clickedButton.removeClass('clicked');
                     $clickedButton.animate({
@@ -77,7 +90,7 @@
                         width: '-=50px'
                     }, 100);
                 }
-
+                // if clicked button is used, widen by 50 pixels
                 if (!$(this).hasClass('clicked')) {
                     $(this).addClass('clicked');
                     $(this).animate({
@@ -93,7 +106,6 @@
                 }
             });
         });
-
     </script>
 </body>
 
