@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="./Pages/dist/bootstrap.min.css">
     <link rel="stylesheet" href="./Pages/dist/styles-dist.css">
     <link rel="stylesheet" href="./styles.css">
+    <style>
+        button {
+            position: absolute;
+        }
+    </style>
     <title>Project 5: Page-view of projects 1-4</title>
 </head>
 
@@ -19,10 +24,10 @@
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary" onclick="loadDoc(1)">Project 1</button>
-                    <button type="button" class="btn btn-primary" onclick="loadDoc(2)">Project 2</button>
-                    <button type="button" class="btn btn-primary" onclick="loadDoc(3)">Project 3</button>
-                    <button type="button" class="btn btn-primary" onclick="loadDoc(4)">Project 4</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(1)">Project 1</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(2)">Project 2</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(3)">Project 3</button>
+                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(4)">Project 4</button>
                 </div>
             </div>
         </div>
@@ -43,10 +48,10 @@
     <footer class="text-muted bg-dark py-5 my-footer">
         <div class="container">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary" onclick="loadDoc(1)">Project 1</button>
-                <button type="button" class="btn btn-primary" onclick="loadDoc(2)">Project 2</button>
-                <button type="button" class="btn btn-primary" onclick="loadDoc(3)">Project 3</button>
-                <button type="button" class="btn btn-primary" onclick="loadDoc(4)">Project 4</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(1)">Project 1</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(2)">Project 2</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(3)">Project 3</button>
+                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(4)">Project 4</button>
             </div>
         </div>
     </footer>
@@ -54,6 +59,42 @@
     <script src="./Pages/dist/bootstrap.bundle.min.js"> </script>
     <script src="./scripts.js"> </script>
     <script src="./Pages/dist/scripts-dist.js"></script>
+    <script src="jquery-1.12.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $clickedButton = null;
+            $('.my-btn').click(function () {
+                var index = $(this).index('.my-btn');
+                var $buttonFooter = $('.my-btn-footer').eq(index);
+                if ($clickedButton != null) {
+                    $clickedButton.removeClass('clicked');
+                    $clickedButton.animate({
+                        width: '-=50px'
+                    }, 100);
+                    var indexClicked = $clickedButton.index('.my-btn');
+                    $('.my-btn-footer').eq(indexClicked).removeClass('clicked');
+                    $('.my-btn-footer').eq(indexClicked).animate({
+                        width: '-=50px'
+                    }, 100);
+                }
+
+                if (!$(this).hasClass('clicked')) {
+                    $(this).addClass('clicked');
+                    $(this).animate({
+                        width: '+=50px'
+                    }, 100);
+                    $buttonFooter.addClass('clicked');
+                    $buttonFooter.animate({
+                        width: '+=50px'
+                    }, 100);
+                    $clickedButton = $(this);
+                } else {
+                    $clickedButton = null;
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>
