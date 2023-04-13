@@ -7,26 +7,26 @@ const bt2 = document.getElementById("bt2");
 const bt3 = document.getElementById("bt3");
 
 const toggleOtherItem = (id) => {
-  for (let box of contentBoxes) {
-    if (box.id !== id) {
-      box.classList.remove('show');
+    for (let box of contentBoxes) {
+        if (box.id !== id) {
+            box.classList.remove('show');
+        }
     }
-  }
 }
 
 bt1.onclick = () => {
-  const id = bt1.attributes["aria-controls"].value;
-  toggleOtherItem(id);
+    const id = bt1.attributes["aria-controls"].value;
+    toggleOtherItem(id);
 };
 
 bt2.onclick = () => {
-  const id = bt2.attributes["aria-controls"].value;
-  toggleOtherItem(id);
+    const id = bt2.attributes["aria-controls"].value;
+    toggleOtherItem(id);
 };
 
 bt3.onclick = () => {
-  const id = bt3.attributes["aria-controls"].value;
-  toggleOtherItem(id);
+    const id = bt3.attributes["aria-controls"].value;
+    toggleOtherItem(id);
 };
 
 function loadDoc(page) {
@@ -155,3 +155,41 @@ function execute() {
     document.getElementById("sortedQuick").innerHTML =
         "Sorted Array (Quick Sort): " + sortedQuick.join(", ");
 }
+
+// make sure page loads fully first
+$(document).ready(function () {
+    // define identifier for clicked button
+    var $clickedButton = null;
+    // select all .my-btn class elements and define click event
+    $('.my-btn').click(function () {
+        // index which button is pressed to later refer to in accessing the other set (header/footer)
+        var index = $(this).index('.my-btn');
+        var $buttonFooter = $('.my-btn-footer').eq(index);
+        // if clicked button not used, retract to default width
+        if ($clickedButton != null) {
+            $clickedButton.removeClass('clicked');
+            $clickedButton.animate({
+                width: '-=50px'
+            }, 100);
+            var indexClicked = $clickedButton.index('.my-btn');
+            $('.my-btn-footer').eq(indexClicked).removeClass('clicked');
+            $('.my-btn-footer').eq(indexClicked).animate({
+                width: '-=50px'
+            }, 100);
+        }
+        // if clicked button is used, widen by 50 pixels
+        if (!$(this).hasClass('clicked')) {
+            $(this).addClass('clicked');
+            $(this).animate({
+                width: '+=50px'
+            }, 100);
+            $buttonFooter.addClass('clicked');
+            $buttonFooter.animate({
+                width: '+=50px'
+            }, 100);
+            $clickedButton = $(this);
+        } else {
+            $clickedButton = null;
+        }
+    });
+});

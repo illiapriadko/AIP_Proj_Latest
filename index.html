@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="./Pages/dist/bootstrap.min.css">
     <link rel="stylesheet" href="./Pages/dist/styles-dist.css">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <style>
         button {
             position: absolute;
@@ -23,16 +25,9 @@
     <header>
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(1)">Project
-                        1</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(2)">Project
-                        2</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(3)">Project
-                        3</button>
-                    <button type="button" class="btn btn-primary my-btn my-btn-header" onclick="loadDoc(4)">Project
-                        4</button>
+                <div class="btn-group" role="group" id="btn-group-header">
                 </div>
+                <p style="color: white">Date: <input type="text" id="datepicker"></p>
             </div>
         </div>
     </header>
@@ -48,61 +43,53 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="text-muted bg-dark py-5 my-footer">
-        <div class="container">
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(1)">Project
-                    1</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(2)">Project
-                    2</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(3)">Project
-                    3</button>
-                <button type="button" class="btn btn-primary my-btn my-btn-footer" onclick="loadDoc(4)">Project
-                    4</button>
-            </div>
-        </div>
-    </footer>
     <!-- Load required scripts -->
     <script src="./Pages/dist/bootstrap.bundle.min.js"> </script>
     <script src="./scripts.js"> </script>
     <script src="./Pages/dist/scripts-dist.js"></script>
     <script src="jquery-1.12.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        // make sure page loads fully first
+        // Define the JSON data
+        var buttons = [
+            { id: 1, label: "Project 1", date: "02/23/2023" },
+            { id: 2, label: "Project 2", date: "03/02/2023" },
+            { id: 3, label: "Project 3", date: "03/09/2023" },
+            { id: 4, label: "Project 4", date: "03/16/2023" }
+        ];
+
         $(document).ready(function () {
-            // define identifier for clicked button
-            var $clickedButton = null;
-            // select all .my-btn class elements and define click event
-            $('.my-btn').click(function () {
-                // index which button is pressed to later refer to in accessing the other set (header/footer)
-                var index = $(this).index('.my-btn');
-                var $buttonFooter = $('.my-btn-footer').eq(index);
-                // if clicked button not used, retract to default width
-                if ($clickedButton != null) {
-                    $clickedButton.removeClass('clicked');
-                    $clickedButton.animate({
-                        width: '-=50px'
-                    }, 100);
-                    var indexClicked = $clickedButton.index('.my-btn');
-                    $('.my-btn-footer').eq(indexClicked).removeClass('clicked');
-                    $('.my-btn-footer').eq(indexClicked).animate({
-                        width: '-=50px'
-                    }, 100);
-                }
-                // if clicked button is used, widen by 50 pixels
-                if (!$(this).hasClass('clicked')) {
-                    $(this).addClass('clicked');
-                    $(this).animate({
-                        width: '+=50px'
-                    }, 100);
-                    $buttonFooter.addClass('clicked');
-                    $buttonFooter.animate({
-                        width: '+=50px'
-                    }, 100);
-                    $clickedButton = $(this);
-                } else {
-                    $clickedButton = null;
+            // Get the button group element
+            function populatemenu(getid) {
+                var btnGroup = document.getElementById(getid);
+
+                // Loop through the buttons data and create the HTML for each button
+                buttons.forEach(function (button) {
+                    var btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.classList.add("btn", "btn-primary", "my-btn", "my-btn-header");
+                    btn.textContent = button.label + ': ' + button.date;
+                    btn.onclick = function () {
+                        loadDoc(button.id);
+                    };
+                    btnGroup.appendChild(btn);
+                });
+            }
+            // iterate through all button groups to call populatemenu(id) function
+            $('.btn-group').each(function () {
+                populatemenu(this.id)
+            });
+
+            $("#datepicker").datepicker({
+                onSelect: function (dateText, inst) {
+                    $(".my-btn-header").each(function () {
+                        var buttonDate = $(this).text().split(": ")[1];
+                        if (buttonDate === dateText) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
                 }
             });
         });
