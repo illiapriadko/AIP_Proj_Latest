@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="./Pages/dist/bootstrap.min.css">
+    <link rel="stylesheet" href="./Pages/dist/styles-dist.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <button ng-repeat="button in buttons">{{button.label}}</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myController', function ($scope, $http) {
+            $http.get('projects.json').then(function (response) {
+                $scope.buttons = response.data;
+            });
+
+            $scope.buttonClicked = function (button) {
+                // Handle button click event
+            };
+        });
+
+    </script>
+</body>

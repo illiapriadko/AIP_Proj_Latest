@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="./Pages/dist/bootstrap.min.css">
     <link rel="stylesheet" href="./Pages/dist/styles-dist.css">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <style>
         button {
             position: absolute;
         }
     </style>
-    <title>Project 8: Populate and filter menu with jQuery</title>
+    <title>Project 9: Populate and filter menu with AngularJS</title>
 </head>
 
 <body>
@@ -25,9 +24,13 @@
     <header>
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <div class="btn-group" role="group" id="btn-group-header">
+                <div class="btn-group" role="group" id="btn-group-header" ng-app="myApp" ng-controller="myController">
+                    <button type="button" ng-repeat="button in buttons" ng-click="buttonClicked(button)"
+                        class="btn btn-primary">
+                        <!-- Expression with button name and date -->
+                        {{button.label+": "+button.date}}
+                    </button>
                 </div>
-                <p style="color: white">Date: <input type="text" id="datepicker"></p>
             </div>
         </div>
     </header>
@@ -38,6 +41,8 @@
             <div id="content">
                 <br><br>
                 <h2>Please choose a project in the header to view.</h2>
+                <p> Version: Project 9<br> This project's ait is to use AngularJS to populate the header with buttons
+                    from a pre-defined .json file.</p>
                 <br><br>
             </div>
         </div>
@@ -48,50 +53,19 @@
     <script src="./scripts.js"> </script>
     <script src="./Pages/dist/scripts-dist.js"></script>
     <script src="jquery-1.12.2.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script>
-        // Define the JSON data
-        var buttons = [
-            { id: 1, label: "Project 1", date: "02/23/2023" },
-            { id: 2, label: "Project 2", date: "03/02/2023" },
-            { id: 3, label: "Project 3", date: "03/09/2023" },
-            { id: 4, label: "Project 4", date: "03/16/2023" }
-        ];
-
-        $(document).ready(function () {
-            // Get the button group element
-            function populatemenu(getid) {
-                var btnGroup = document.getElementById(getid);
-
-                // Loop through the buttons data and create the HTML for each button
-                buttons.forEach(function (button) {
-                    var btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.classList.add("btn", "btn-primary", "my-btn", "my-btn-header");
-                    btn.textContent = button.label + ': ' + button.date;
-                    btn.onclick = function () {
-                        loadDoc(button.id);
-                    };
-                    btnGroup.appendChild(btn);
-                });
-            }
-            // iterate through all button groups to call populatemenu(id) function
-            $('.btn-group').each(function () {
-                populatemenu(this.id)
+        // my application to populate buttons
+        var app = angular.module('myApp', []);
+        app.controller('myController', function ($scope, $http) {
+            // fetch .json from directory
+            $http.get('./projects.json').then(function (response) {
+                $scope.buttons = response.data;
             });
-
-            $("#datepicker").datepicker({
-                onSelect: function (dateText, inst) {
-                    $(".my-btn-header").each(function () {
-                        var buttonDate = $(this).text().split(": ")[1];
-                        if (buttonDate === dateText) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    });
-                }
-            });
+            $scope.buttonClicked = function (button) {
+                // Handle button click event
+                loadDoc(button.id);
+            };
         });
     </script>
 </body>
